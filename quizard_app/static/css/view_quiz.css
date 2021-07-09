@@ -1,0 +1,204 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Inconsolata', monospace;
+}
+
+html{
+    background: url(https://i.imgur.com/CwBxkGK.png) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#wrapper{
+    max-width:1000px;
+    width: 80%;
+    margin: auto;
+    padding:10px;
+}
+
+.navbar{
+    background-color: transparent;
+    border-bottom: 1px solid rgb(255, 255, 255); 
+    margin-bottom:10px;
+}
+
+#quizard{
+    height:100px;
+}
+
+#user-picture{
+    margin-top:10px;
+    height:80px;
+    width:80px;
+    border-radius: 50%;
+    margin-right:10px;
+    margin-left:10px;
+    object-fit: cover;
+}
+
+#user-picture:hover{
+    opacity:.5;
+}
+
+#nav-username{
+    text-transform: capitalize;
+}
+
+.navbar-item, .navbar-link{
+    color:white;
+    font-size:20px;
+    transition: all 0.3s ease-out;
+}
+
+.navbar-link{
+    background: transparent;
+}
+
+.button{
+    border: 1px rgb(74, 74, 74);
+    background-color:rgb(255, 255, 255);
+    font-family: 'Inconsolata', monospace;
+    color:rgb(0, 0, 0);
+    font-weight: bolder;
+    transition: 350ms;
+}
+
+.button:hover{
+    background-color:rgb(2, 2, 2);
+    color:rgb(255, 255, 255);
+    filter: drop-shadow(0.25rem 0 0.85rem rgb(255, 255, 255));
+}
+
+table{
+    margin-top:20px;
+}
+
+th{
+    background: black;
+}
+
+h2{
+    font-weight:bolder;
+    color:white;
+}
+
+tr{
+    font-weight:bolder;
+}
+
+span{
+    color:rgb(118, 117, 117);
+    font-weight:bolder;
+    font-size:20px;
+}
+
+span:hover{
+    filter: drop-shadow(0.25rem 0 0.85rem rgb(255, 255, 255));
+}
+
+p{
+    color:white;
+    font-weight: bolder;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+p a:hover{
+    color:white;
+}
+
+.username{
+    color:white;
+}
+
+.username:hover{
+    color:white;
+    filter: drop-shadow(0.25rem 0 0.85rem rgb(255, 255, 255));
+}
+
+.quiz-information{
+    margin-top:20px;
+    background: url(https://i.imgur.com/ChpMnxD.png);
+    background-color: rgb(46, 46, 46);
+    padding:10px;
+    border: 2px solid rgb(118, 118, 118);
+}
+
+#quiz-title, #quiz-category{
+    color:white;
+    font-weight:bolder;
+}
+
+#quiz-title{
+    text-transform: uppercase;
+}
+
+.likes-dislikes{
+    height:100px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+#like-dislike-buttons{
+    background-color: rgb(91, 91, 91);
+    color:white;
+    margin-right: 8px;
+}
+
+#like-dislike-buttons:hover{
+    color:black;
+    background-color:rgb(255, 255, 255);
+}
+
+#start-quiz-button{
+    margin-top:20px;
+}
+
+#start-quiz-button:hover{
+    color:black;
+    background-color:rgb(255, 255, 255);
+}
+
+.description{
+    color:rgb(118, 117, 117);
+    font-size: 25px;
+}
+
+.description:hover{
+    filter: drop-shadow(0.25rem 0 0.85rem rgb(255, 255, 255));
+}
+
+#delete-flashcard{
+    border: 1px rgb(74, 74, 74);
+    background-color:rgb(255, 255, 255);
+    font-family: 'Inconsolata', monospace;
+    color:rgb(0, 0, 0);
+    font-weight: bolder;
+    transition: 350ms;
+}
+
+#delete-flashcard{
+    background-color: rgb(91, 91, 91);
+    color:white;
+}
+
+#delete-flashcard:hover{
+    background-color: white;
+    color: rgb(255, 205, 205);
+}
+
+#delete-quiz{
+    background-color: rgb(255, 1, 1);
+}
+
+#delete-button:hover{
+    background: transparent;
+}
+
+#creator{
+    margin-top:-10px;
+    text-align: end;
+}

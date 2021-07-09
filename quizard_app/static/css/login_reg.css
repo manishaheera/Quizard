@@ -1,0 +1,116 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Inconsolata', monospace;
+}
+
+html{
+    background: url(https://i.imgur.com/CwBxkGK.png) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#wrapper{
+    max-width:1000px;
+    padding:10px;
+    width: 80%;
+    margin: auto;
+}
+
+.navbar{
+    margin-top:20px;
+    background-color: transparent;
+    margin-bottom: -20px;
+}
+
+#quizard{
+height:100px;
+margin-bottom:-20px;
+}
+
+#logo{
+    height:100px;
+    transition: 350ms;
+    object-fit: cover;
+}
+
+#logo:hover{
+    opacity:0.5;
+}
+
+#description{
+    padding:5px;
+    margin-top: 5px;
+    color:white;
+    font-size: 17px;
+    width:70%;
+    height:fit-content;
+}
+
+#error-message{
+    font-size:15px;
+    color:rgb(255, 1, 1);
+    font-weight:bolder;
+}
+
+.messages {
+    background:transparent;
+    text-align: center;
+    margin: 10px auto;
+    list-style-type: none;
+    padding: 10px;
+}
+
+.card-header{
+    font-weight:bolder; 
+    background-color:black;
+    font-size:30px;
+}
+
+#register-login{
+    padding: 20px;
+    background:black;
+    border: 0.2px solid #323232;
+}
+
+.card-header-title{
+    color:rgb(118, 117, 117);
+    font-size:35px;
+}
+
+.card-header-title:hover{
+    filter: drop-shadow(0.25rem 0 0.85rem rgb(255, 255, 255));
+}
+
+.label{
+    color:white;
+}
+
+.input{
+    color:white;
+    background-color:black;
+    border: 0.2px solid #323232;
+    font-family: 'Inconsolata', monospace;
+    transition: 100ms;
+}
+
+.input:hover{
+    background-color: black;
+    color:white;
+    filter: drop-shadow(0.25rem 0 0.85rem rgb(92, 92, 92));
+}
+
+.button{
+    border: 1px rgb(74, 74, 74);
+    background-color:rgb(255, 255, 255);
+    font-family: 'Inconsolata', monospace;
+    color:rgb(0, 0, 0);
+    font-weight: bolder;
+    transition: 350ms;
+}
+
+.button:hover{
+    filter: drop-shadow(0.25rem 0 0.85rem rgb(255, 255, 255));
+}

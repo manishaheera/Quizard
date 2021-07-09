@@ -1,0 +1,126 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Inconsolata', monospace;
+}
+
+html{
+    background: url(https://i.imgur.com/CwBxkGK.png) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#wrapper{
+    max-width:1000px;
+    padding:10px;
+    width: 80%;
+    margin: auto;
+}
+
+.navbar{
+    background-color: transparent;
+    border-bottom: 1px solid rgb(255, 255, 255); 
+}
+
+#quizard{
+    height:100px;
+}
+
+#user-picture{
+    margin-top:10px;
+    margin-left:10px;
+    margin-right: 10px;
+    height:80px;
+    width:80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+#user-picture:hover{
+    opacity:.5;
+}
+
+#nav-username{
+    text-transform: capitalize;
+}
+
+.navbar-item, .navbar-link{
+    color:white;
+    font-size:20px;
+    transition: all 0.3s ease-out;
+}
+
+.navbar-link{
+    background: transparent;
+}
+
+.button{
+    border: 1px rgb(74, 74, 74);
+    background-color:rgb(255, 255, 255);
+    font-family: 'Inconsolata', monospace;
+    color:rgb(0, 0, 0);
+    font-weight: bolder;
+    transition: 350ms;
+}
+
+.button:hover{
+    background-color:rgb(2, 2, 2);
+    color:rgb(255, 255, 255);
+    filter: drop-shadow(0.25rem 0 0.85rem rgb(255, 255, 255));
+}
+
+#all-quizzes{
+    height:800px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+h1{
+    font-weight:bolder;
+    margin-top:20px;
+    color:white;
+    font-size:25px;
+    margin-bottom:20px;
+}
+
+.name{
+    font-family: "cabin";
+    font-weight:200;
+    display:inline;
+    text-transform: uppercase;
+}
+
+.name:hover{
+    filter: drop-shadow(0.25rem 0 0.85rem rgb(255, 255, 255));
+}
+
+select{
+    padding:10px;
+    color:white;
+    background-color: black;
+    width:28%;
+}
+
+#submit{
+    margin-bottom:20px;
+    margin-left: 8px;
+}
+
+th{
+    background: black;
+}
+
+h2{
+    font-weight:bolder;
+    color:white;
+}
+
+tr{
+    font-weight:bolder;
+}
+
+#quiz-name{
+    text-transform: uppercase;
+}

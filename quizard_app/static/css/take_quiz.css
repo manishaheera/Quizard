@@ -1,0 +1,170 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Inconsolata', monospace;
+}
+
+html{
+    background: url(https://i.imgur.com/CwBxkGK.png) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#wrapper{
+    max-width:1000px;
+    width: 80%;
+    margin: auto;
+    padding:10px;
+}
+
+.navbar{
+    background-color: transparent;
+    border-bottom: 1px solid rgb(255, 255, 255); 
+    margin-bottom:10px;
+}
+
+#quizard{
+    height:100px;
+}
+
+#user-picture{
+    margin-top:10px;
+    margin-left:10px;
+    margin-right: 10px;
+    height:80px;
+    width:80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+#user-picture:hover{
+    opacity:.5;
+}
+
+#nav-username{
+    text-transform: capitalize;
+}
+
+.navbar-item, .navbar-link{
+    color:white;
+    font-size:20px;
+    transition: all 0.3s ease-out;
+}
+
+.navbar-link{
+    background: transparent;
+}
+
+.button{
+    border-style:none;
+    background-color:rgb(255, 255, 255);
+    font-family: 'Inconsolata', monospace;
+    color:rgb(0, 0, 0);
+    font-weight: bolder;
+    transition: 350ms;
+}
+
+.button:hover{
+    background-color:rgb(2, 2, 2);
+    color:rgb(255, 255, 255);
+    filter: drop-shadow(0.25rem 0 0.85rem rgb(255, 255, 255));
+}
+
+h2{
+    font-size:25px;
+    font-weight:bold;
+    color:white;
+}
+
+p{
+    color:white;
+    font-weight:bolder;
+    margin-bottom: 20px;
+}
+
+.quiz-information{
+    text-align: center;
+    background: url(https://i.imgur.com/ChpMnxD.png);
+    background-color: rgb(46, 46, 46);
+    padding:10px;
+    border: 2px solid rgb(118, 118, 118);
+    margin-bottom:20px;
+}
+
+#quiz-name, #question-number{
+    text-transform:uppercase;
+    font-size:35px;
+}
+
+#question-number{
+    margin-bottom: 10px;
+    font-weight:bolder;
+    font-size: 35px;
+    font-family: 'cabin';
+    color:rgb(118, 117, 117);
+}
+
+#question-image{
+    object-fit: cover;
+    width:400px;
+    height:300px;
+    margin-bottom:10px;
+}
+
+#question{
+    font-size:25px;
+    font-weight:bolder;
+}
+
+#answer-input{
+    background: rgb(255, 255, 255);
+    color:black;
+    padding:5px;
+    width:800px;
+    height:70px;
+    font-size:25px;
+}
+
+#submit{
+    margin-top:20px;
+    margin-left: 90%;
+}
+
+.slideshow-container{
+    border: 2px solid rgb(118, 118, 118);
+    margin-top:20px;
+    background-color: rgb(28, 28, 28);
+    position: relative;
+}
+
+.mySlides{
+    height:600px;
+    display: none;
+    padding: 50px;
+    text-align: center;
+}
+
+.prev, .next{
+    position: absolute;
+    top: 50%;
+    font-size: 30px;
+    width: auto;
+    margin-top: -30px;
+    padding: 10px;
+    color: rgb(254, 252, 252);
+    font-size: 30px;
+    border-radius: 0 3px 3px 0;
+}
+
+.next{
+    position: absolute;
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover{
+    filter: drop-shadow(0.25rem 0 0.85rem rgb(255, 255, 255));
+    background-color: rgba(255, 255, 255);
+}

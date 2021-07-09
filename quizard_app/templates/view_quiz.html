@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        {% load static %}
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Quizard &#129668;</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cabin&family=Castoro&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/view_quiz.css' %}">
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- NAVBAR -->
+        <nav class="navbar">
+
+            <!-- LEFT SIDE OF NAVBAR -->
+            <div class="navbar-brand">
+                <p class="title is-2 is-align-self-center" id="quizard"><a href="/quizard"><img src="{% static 'pictures/Quizard.gif' %}" id="quizard"/></a></p>
+
+                    <!-- BURGER MENU -->
+                    <a role="button" class="navbar-burger is-align-self-center" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+            </div>
+            <!-- LEFT SIDE OF NAVBAR END -->
+
+            <!-- RIGHT SIDE OF NAVBAR -->
+            <div class="navbar-menu navbar-end">
+
+                <!-- USER -->
+                <a href="/quizard/user/{{user.username}}"><img src="/media/{{user.profile_photo}}" alt="{{this_user.username}}_photo" id="user-picture"></a>
+
+                <a href="/quizard/user/{{user.username}}" class="navbar-item" id="nav-username">
+                    {{user.username}}
+                </a>
+
+                <!-- NAVBAR LINKS -->
+                <a href="/quizard/quizzes/new" class="navbar-item">
+                    Create
+                </a>
+
+                <a href="/quizard/user/{{user.username}}/quizzes" class="navbar-item">
+                    Your Quizzes
+                </a>
+
+                <!-- LOGOUT -->
+                <div class="navbar-item">
+                    <form action="/logout" method="POST">
+                        {% csrf_token %}
+                        <input type="submit" value="LOGOUT" class="button">
+                    </form>
+                </div>
+            </div>
+            <!-- END RIGHT SIDE OF NAV -->
+        </nav>
+        <!-- END NAVBAR -->
+
+        <!-- LEFT ANCESTOR TILE -->
+        <div class="tile is-ancestor">
+
+            <!-- LEFT PARENT TILE -->
+            <div class="tile is-parent is-3">
+
+                <!-- LEFT CHILD TILE -->
+                <div class="tile is-child">
+
+                    <!-- QUIZ INFORMATION LEFT -->
+                    <div class = "quiz-information">
+                        <p class="title is-2" id="quiz-title">{{quiz.name}}</p>
+                        <p class="subtitle is-5" id="quiz-category">Category: {{quiz_category}}</p>
+            
+                            <!-- LIKE & DISLIKE BUTTONS -->
+                            <div class="field is-grouped">
+                                <form action="/quizard/quizzes/{{quiz.id}}/like" method="POST">
+                                    {% csrf_token %}
+                                    <input type="submit" value="LIKE &#128077;" class="button" id="like-dislike-buttons">
+                                </form>
+
+                                <form action="/quizard/quizzes/{{quiz.id}}/dislike" method="POST">
+                                    {% csrf_token %}
+                                    <input type="submit" value="DISLIKE &#128078;" class="button" id="like-dislike-buttons">
+                                </form>
+                            </div>
+
+                        <span>Questions:</span>
+                        <p>{{quiz.questions.all|length}}</p>
+
+                        <span>Popularity: </span>
+                        <p> {{popularity}}%</p>
+
+                        {% if score %}
+                            <span>Recent Score: </span>
+                            <p> {{score}}%</p>
+                        {% endif %}
+                        
+                        <div class="likes-dislikes">
+                            <span>Liked By:</span><br>
+                            {% for user in quiz.liked_by.all %}
+                                <p><a href="/quizard/user/{{user.username}}" class="username">{{user.username}}</a><p>
+                            {% endfor %}
+
+                            <span>Disliked By:</span> <br>
+                            {% for user in quiz.disliked_by.all %}
+                                <p><a href="/quizard/user/{{user.username}}" class="username">{{user.username}}</a></p>
+                            {% endfor %}
+                        </div>
+
+                        <a href="/quizard/quizzes/{{quiz.id}}/take_quiz" class="button" id="start-quiz-button">Start Quiz</a>
+                    </div>
+                    <!-- END LEFT QUIZ INFORMATION -->
+                </div>
+                <!-- END LEFT CHILD TILE -->
+            </div>
+            <!-- END LEFT PARENT TILE -->
+
+            <!-- RIGHT PARENT TILE -->
+            <div class="tile is-parent" style="margin-left:10px;">
+
+                <!-- RIGHT CHILD TILE -->
+                <div class="tile is-child">
+                    <!-- RIGHT QUIZ INFORMATION -->
+                    {% if quiz.description %}
+                        <p class="description">Description:</p>
+                        <p id="description">{{quiz.description}}</p>
+                    {% endif %}
+
+                    <table class="table is-bordered is-fullwidth is-striped">
+                        <thead>
+                            <tr>
+                                <th><h2>No.</h2></th>
+                                <th><h2>Question(s)</h2></th>
+                                <th><h2>Answer(s)</h2></th>
+                                {% if quiz.created_by == user %}
+                                <th><h2>Actions</h2></th>
+
+                                {% endif %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for question in quiz.questions.all %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{question.entry}}</td>
+                                    {% if quiz.created_by == user %}
+                                    <td>{{question.answer}}</td>
+                                    <!-- IF QUIZ CREATOR == USER SIGNED IN, DISPLAY EDIT & DELETE FLASHCARD BUTTONS -->
+                                    {% if quiz.created_by == user %}
+                                    <td>
+
+                                        <form action="/quizard/quizzes/{{quiz.id}}/flashcard/{{question.id}}/destroy" method="POST">
+                                            {% csrf_token %}
+                                            <input type="submit" value="Delete" class="button is-danger is-small" id="delete-flashcard" onclick="return confirm('Are you sure you want to delete this flashcard?');">
+                                        </form>
+
+                                        {% endif %}
+                                    </td>
+                                    {% endif %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <!-- END RIGHT QUIZ INFORMATION -->
+
+                    <!-- EDIT & DELETE BUTTONS -->
+                    {% if quiz.created_by == user %}
+                        <div class="field is-grouped" id="edit-delete">
+                            <a href="/quizard/quizzes/{{quiz.id}}/edit" class="button" style="margin-right: 10px;">Edit Quiz</a>
+
+                            <form action="/quizard/quizzes/{{quiz.id}}/destroy" method="POST">
+                                {% csrf_token %}
+                                <input type="submit" value="Delete Quiz" class="button is-danger" id="delete-quiz" onclick="return confirm('Are you sure you want to delete this quiz?');">
+                            </form>
+                        </div>
+                    {% endif %}
+
+                    <!-- IF QUIZ CREATOR != USER SIGNED IN, DISPLAY CREATOR -->
+                    {% if quiz.created_by != user %}
+                    <p id="creator"> quiz by <a href="/quizard/user/{{quiz.created_by}}" id="creator-link">@{{quiz.created_by}}</a><br> {{quiz.created_at}}</p>
+                    {% endif %}
+                </div>
+                <!-- END RIGHT CHILD TILE -->
+            </div>
+            <!-- END RIGHT PARENT TILE -->
+        </div>
+        <!-- END ANCESTOR TILE -->
+
+    </div>
+</body>

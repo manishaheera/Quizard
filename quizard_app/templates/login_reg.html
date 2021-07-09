@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizard &#129668;</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cabin&family=Castoro&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/login_reg.css' %}">
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- NAVBAR -->
+        <nav class="navbar">
+            <div class="navbar-brand">
+                    <div class="title">
+                        <span class="title is-2 is-align-self-center"> <img src="{% static 'pictures/Quizard.gif' %}" id="quizard"/></span>
+                        <img src="{% static 'pictures/QuizardLogo.png' %}" id="logo"/><br>
+                        <p id="description">A wickedly fun & enchanting education platform that makes it easy to discover, create, and share intuitively crafted quizzes that cover a plethora of subjects.<br>
+                        Receive invaluable guidance on a wide range of topics, command a deeper understanding of core concepts, and valiantly tackle exams by becoming a revision master with Quizard. 
+                        <p id="wand" onclick="changeBackground()">&#129668;</p>
+                        </p>
+                    </div>
+    
+                    <!-- BURGER MENU -->
+                    <a role="button" class="navbar-burger is-align-self-center" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" id="navbar">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+            </div>
+        </nav>
+        <!-- NAVBAR END -->
+
+        <!-- ERROR MESSAGES -->
+            {% if messages %}
+                <div class="card messages">
+                    <header class="card-header" id="error-message">
+                            ERROR(S)
+                    </header>
+
+                    {% for message in messages %}
+                        <header class="card-header" id="error-message">
+                                {{message}}
+                        </header>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        <!-- END ERROR MESSAGES -->
+
+        <!-- ANCESTOR TILE -->
+        <div class="tile is-ancestor is-justify-content-space-between">
+
+            <!-- PARENT TILE FOR REGISTER -->
+            <div class="tile is-parent is-6 is-vertical">
+
+                <!-- CHILD FOR REGISTER CARD -->
+                <div class="tile is-child is-12">
+                    <!-- CARD TITLE -->
+                    <div class="card" id="register-login-title">
+                        <header class="card-header">
+                            <p class="card-header-title">REGISTER</p>
+                        </header>
+                        <!-- END CARD TITLE DIV -->
+                        </div>
+                </div>
+                <!-- END CHILD FOR REGISTER -->
+
+                <!-- CHILD TILE FOR REGISTER -->
+                <div class="tile is-child">
+                    <div class="card" id="register-login">
+                        <form action="/register" method="POST">
+                            {% csrf_token %}
+
+                            <div class="field">
+                                <label for="first_name" class="label">First Name</label>
+                                <input type="text" class="input" name="first_name">
+                            </div>
+
+                            <div class="field">
+                                <label for="last_name" class="label">Last Name</label>
+                                <input type="text" class="input" name="last_name">
+                            </div>
+
+                            <div class="field">
+                                <label for="username" class="label">Username</label>
+                                <input type="text" class="input" name="username">
+                            </div>
+
+                            <div class="field">
+                                <label for="email" class="label">Email</label>
+                                <input type="text" class="input" name="email">
+                            </div>
+
+                            <div class="field">
+                                <label for="password" class="label">Password</label>
+                                <input type="password" class="input" name="password">
+                            </div>
+
+                            <div class="field">
+                                <label for="confirm_password" class="label">Confirm Password</label>
+                                <input type="password" class="input" name="confirm_password">
+                            </div>
+
+                            <input type="submit" value="REGISTER" class="button">
+
+                        </form>
+                    </div>
+                </div>
+                <!-- END CHILD TILE FOR REGISTER -->
+
+            </div>
+            <!-- END PARENT TILE FOR REGISTER -->
+
+            <!-- PARENT TILE FOR LOGIN -->
+            <div class="tile is-parent is-6 is-vertical">
+
+                <!-- CHILD FOR LOGIN CARD -->
+                <div class="tile is-child is-12">
+                    <!-- CARD TITLE -->
+                    <div class="card">
+                        <header class="card-header">
+                            <p class="card-header-title">LOGIN</p>
+                        </header>
+                        </div>
+                        <!-- END CARD TITLE DIV -->
+                </div>
+                <!-- END CHILD FOR LOGIN -->
+
+                <!-- CHILD TILE FOR LOGIN -->
+                <div class="tile is-child">
+                    <div class="card" id="register-login">
+                        <form action="/login" method="POST">
+                            {% csrf_token %}
+
+                            <div class="field">
+                                <label for="email" class="label">Email</label>
+                                <input type="text" class="input" name="email">
+                            </div>
+
+                            <div class="field">
+                                <label for="password" class="label">Password</label>
+                                <input type="password" class="input" name="password">
+                            </div>
+
+                            <input type="submit" value="LOGIN" class="button">
+
+                        </form>
+                    </div>
+                </div>
+                <!-- END CHILD TILE FOR LOGIN -->
+        </div>
+        <!-- END ANCESTOR TILE -->
+
+        <!-- JAVASCRIPT CHANGE BACKGROUND IMAGE-->
+        <script>
+            function changeBackground() {
+                document.body.style.backgroundImage = "url('../media/sparkle.gif')";
+                document.body.style.backgroundRepeat = "no-repeat";
+                document.body.style.backgroundSize = "cover";
+                document.body.style.borderBottom= '10px solid #031548';
+            }
+        </script>
+    </div>
+</body>
+</html>

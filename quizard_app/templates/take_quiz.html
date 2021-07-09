@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        {% load static %}
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Quizard &#129668;</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cabin&family=Castoro&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/take_quiz.css' %}">
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- NAVBAR -->
+        <nav class="navbar">
+
+            <!-- LEFT SIDE OF NAVBAR -->
+            <div class="navbar-brand">
+                <p class="title is-2 is-align-self-center" id="quizard"><a href="/quizard"><img src="{% static 'pictures/Quizard.gif' %}" id="quizard"/></a></p>
+                <!-- BURGER MENU -->
+                <a role="button" class="navbar-burger is-align-self-center" aria-label="menu"
+                    aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+
+                <!-- LEFT SIDE OF NAVBAR END -->
+            </div>
+
+            <!-- RIGHT SIDE OF NAVBAR -->
+            <div class="navbar-menu navbar-end">
+
+                <!-- USER-->
+                <a href="/quizard/user/{{user.username}}"><img src="/media/{{user.profile_photo}}" alt="{{this_user.username}}_photo" id="user-picture"></a>
+
+
+                <a href="/quizard/user/{{user.username}}" class="navbar-item" id="nav-username">
+                    {{user.username}}
+                </a>
+
+                <!-- NAVBAR LINKS -->
+                <a href="/quizard/quizzes/new" class="navbar-item">
+                    Create
+                </a>
+
+                <a href="/quizard/user/{{user.username}/quizzes" class="navbar-item">
+                    Your Quizzes
+                </a>
+
+                <!-- LOGOUT -->
+                <div class="navbar-item">
+                    <form action="/logout" method="POST">
+                        {% csrf_token %}
+                        <input type="submit" value="LOGOUT" class="button">
+                    </form>
+                </div>
+            </div>
+            <!-- END RIGHT SIDE OF NAVBAR -->
+
+        </nav>
+        <!-- NAVBAR END -->
+
+        <!-- QUIZ -->
+        <div class="quiz-information">
+            <h2 id="quiz-name">{{quiz.name}}</h2>
+        </div>
+
+        <!-- QUIZ CAROUSEL -->
+        <div class="slideshow-container">
+            {% for question in quiz.questions.all %}
+
+            <div class="mySlides">
+                <h2 id="question-number"> Question {{forloop.counter}} </h2>
+
+                {% if question.image %}
+                    <img src="/media/{{question.image}}" id="question-image"/>
+                {% endif %}
+                <!-- QUIZ FORM -->
+                <form action="/quizard/quizzes/{{quiz.id}}/mark_quiz" method='POST'>
+                    {% csrf_token %}
+                    <p id="question">{{question.entry}}</p>
+                    <p><input type="text" name="question{{forloop.counter}}" id="answer-input"></p>
+            </div>
+            {% endfor %}
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+        <!-- END QUIZ CAROUSEL -->
+        <input type="submit" value="Submit" class="button" id="submit" onclick="return confirm('Are you sure you want to submit your quiz?')">
+                </form>
+                <!-- END QUIZ FORM -->
+        
+        <!-- CAROUSEL JAVASCRIPT -->
+            <script>
+                var slideIndex = 1;
+                    showSlides(slideIndex);
+                
+                function plusSlides(n) {
+                    showSlides(slideIndex += n);
+                }
+                
+                function currentSlide(n) {
+                    showSlides(slideIndex = n);
+                }
+                
+                function showSlides(n) {
+                    var i;
+                    var slides = document.getElementsByClassName("mySlides");
+                    var dots = document.getElementsByClassName("dot");
+                    if (n > slides.length) {slideIndex = 1}    
+                    if (n < 1) {slideIndex = slides.length}
+                    for (i = 0; i < slides.length; i++) {
+                        slides[i].style.display = "none";  
+                    }
+                    for (i = 0; i < dots.length; i++) {
+                        dots[i].className = dots[i].className.replace(" active", "");
+                    }
+                    slides[slideIndex-1].style.display = "block";  
+                    dots[slideIndex-1].className += " active";
+                    }
+            </script>
+            <!-- END CAROUSEL JAVASCRIPT -->
+    
+    </div>
+</body>
+
+</html>

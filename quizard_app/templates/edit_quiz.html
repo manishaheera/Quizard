@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        {% load static %}
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Quizard &#129668;</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cabin&family=Castoro&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/create_quiz.css' %}">
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- NAVBAR -->
+        <nav class="navbar">
+
+            <!-- LEFT SIDE OF NAVBAR -->
+            <div class="navbar-brand">
+                <p class="title is-2 is-align-self-center" id="quizard"><a href="/quizard"><img src="{% static 'pictures/Quizard.gif' %}" id="quizard"/></a></p>
+
+                <!-- BURGER MENU -->
+                <a role="button" class="navbar-burger is-align-self-center" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    </a>
+            </div>
+            <!-- LEFT SIDE OF NAVBAR END -->
+
+            <!-- RIGHT SIDE OF NAVBAR -->
+            <div class="navbar-menu navbar-end">
+
+                <!-- USER -->
+                <a href="/quizard/user/{{user.username}}"><img src="/media/{{user.profile_photo}}" alt="{{this_user.username}}_photo" id="user-picture"></a>
+
+                <a href="/quizard/user/{{user.username}}" class="navbar-item" id="nav-username">
+                    {{user.username}}
+                </a>
+
+                <!-- NAVBAR LINKS -->
+                <a href="/quizard/quizzes/new" class="navbar-item">
+                    Create
+                </a>
+
+                <a href="/quizard/user/{{user.username}}/quizzes" class="navbar-item">
+                    Your Quizzes
+                </a>
+
+                <!-- LOGOUT -->
+                <div class="navbar-item">
+                    <form action="/logout" method="POST">
+                        {% csrf_token %}
+                        <input type="submit" value="LOGOUT" class="button">
+                    </form>
+                </div>
+            </div>
+            <!-- END RIGHT SIDE OF NAV -->
+        </nav>
+        <!-- END NAVBAR -->
+    
+        <!-- ERROR MESSAGES -->
+        {% if messages %}
+        <div class="card messages">
+            <header class="card-header" id="error-message">
+                    ERROR(S)
+            </header>
+
+            {% for message in messages %}
+                <header class="card-header" id="error-message">
+                        {{message}}
+                </header>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <!-- END ERROR MESSAGES -->
+
+    <!-- EDIT QUIZ -->
+    <form action="/quizard/quizzes/{{quiz.id}}/update" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class= "quiz-information">
+        <!-- QUIZ NAME & CATEGORY -->
+            <div class="field is-grouped">
+            
+                <div class="field">
+                    <label for="quiz_name" class="label">Quiz Name</label>
+                    <input type="text" value="{{quiz.name}}" class="input" name="quiz_name">
+                </div>
+
+                <div class="field">
+                    <label for="category" class="label" id="category">Category</label>
+                    <select name="category" class="select is-normal">
+                        {% for choice in category_choices %}
+                            
+                            {% if choice.1 == quiz_category %}
+                            <option value="{{choice.0}}" selected>{{choice.1}}</option>
+                            {% else %}
+                            <option value="{{choice.0}}">{{choice.1}}</option>
+                            {% endif %}
+
+                        {% endfor %}
+                    </select>
+                </div>
+        </div>
+
+        <!-- QUIZ DESCRIPTION -->
+        <div class="field">
+            <label for="description" class="label">Description</label>
+
+            {% if quiz.description %}
+                <textarea name="description" class="textarea">{{quiz.description}}</textarea>
+            {% else %}
+                <textarea name="description" class="textarea" value="{{quiz.description}}" placeholder="OPTIONAL"></textarea>
+            {% endif %}
+        </div>
+        </div>
+
+        <!-- QUIZ QUESTIONS -->
+        <p class="title is-6" id="header">QUESTIONS</p>
+        <div id="questions">
+            {% for question in quiz.questions.all %}
+
+                <div class="field is-grouped is-justify-content-space-between is-align-items-center">
+                    <!-- ENTRY -->
+                    <div class="field control is-expanded">
+                        <label for="entry{{forloop.counter}}" class="label">Question {{forloop.counter}}</label>
+                        <input type="text" class="input" value="{{question.entry}}" name="entry{{forloop.counter}}">
+                    </div>
+
+                    <!-- IMAGE !!FIX!!:((if question has image, image should not dissappear on update)) --> 
+                        <div class="field">
+                            <label for="image{{forloop.counter}}" class="label">Add/Update Image</label>
+                            <input type="file" name="image{{forloop.counter}}" class="file" value="{{question.image}}">
+                        </div>
+
+                    <!-- ANSWER -->
+                    <div class="field">
+                        <label for="answer{{forloop.counter}}" class="label">Answer {{forloop.counter}}</label>
+                        <input type="text" class="input" value="{{question.answer}}" name="answer{{forloop.counter}}">
+                    </div>
+                </div>
+            {% endfor %}
+
+            {% for i in range %}
+                <div class="field is-grouped is-justify-content-space-between is-align-items-center">
+                    <!-- ENTRY -->
+                    <div class="field control is-expanded">
+                        <label for="entry{{i}}" class="label">Question {{i}}</label>
+                        <input type="text" class="input" placeholder="Question #{{i}}" name="entry{{i}}">
+                    </div>
+
+                    <!-- ENTRY IMAGE -->
+                    <div class="field">
+                        <label for="image{{i}}" class="label">Add Image?</label>
+                        <input type="file" name="image{{i}}" class="file">
+                    </div>
+
+                    <!-- ANSWER -->
+                    <div class="field">
+                        <label for="answer{{i}}" class="label">Answer {{i}}</label>
+                        <input type="text" class="input" placeholder="Answer #{{i}}" name="answer{{i}}">
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+        <!-- END QUIZ QUESTIONS -->
+
+        <input type="submit" value="Update Quiz" class="button" id="submit-button">
+    </form>
+    <!-- END EDIT QUIZ -->
+
+    </div>
+</body>

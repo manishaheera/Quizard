@@ -1,0 +1,136 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Inconsolata', monospace;
+}
+
+body{
+    background:url(https://i.imgur.com/CwBxkGK.png);
+    background-repeat: round;
+    }
+
+#wrapper{
+    max-width:1000px;
+    padding:10px;
+    width: 80%;
+    margin: auto;
+}
+
+.navbar{
+    background-color: transparent;
+    border-bottom: 1px solid rgb(255, 255, 255); 
+}
+
+#quizard{
+    height:100px;
+}
+
+#user-picture{
+    margin-top:10px;
+    margin-left:10px;
+    margin-right: 10px;
+    height:80px;
+    width:80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+#user-picture:hover{
+    opacity:.5;
+}
+
+#nav-username{
+    text-transform: capitalize;
+}
+
+.navbar-item, .navbar-link{
+    color:white;
+    font-size:20px;
+    transition: all 0.3s ease-out;
+}
+
+.navbar-link{
+    background: transparent;
+}
+
+.button{
+    border: 1px rgb(74, 74, 74);
+    background-color:rgb(255, 255, 255);
+    font-family: 'Inconsolata', monospace;
+    color:rgb(0, 0, 0);
+    font-weight: bolder;
+    transition: 350ms;
+}
+
+.button:hover{
+    background-color:rgb(2, 2, 2);
+    color:rgb(255, 255, 255);
+    filter: drop-shadow(0.25rem 0 0.85rem rgb(255, 255, 255));
+}
+
+#category{
+    margin-left:15%;
+}
+
+select{
+    margin-left:15%;
+    width:300px;
+}
+
+.textarea{
+    margin-bottom:20px;
+}
+
+#header{
+    color:white;
+    font-family: 'cabin';
+    font-size:25px;
+    font-weight:bolder;
+    text-align:center;
+}
+
+.label{
+    margin-top:20px;
+    color:white;
+}
+
+.quiz-information{
+    margin-top:20px;
+    background: url(https://i.imgur.com/ChpMnxD.png);
+    background-color: rgb(46, 46, 46);
+    padding:10px;
+    border: 2px solid rgb(118, 118, 118);
+    margin-bottom:20px;
+}
+
+#error-message{
+    font-size:15px;
+    color:rgb(255, 1, 1);
+    font-weight:bolder;
+}
+
+.messages {
+    background:transparent;
+    text-align: center;
+    margin: 10px auto;
+    list-style-type: none;
+    padding: 10px;
+}
+
+#questions{
+    padding: 10px;
+    max-height: 800px; 
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.file{
+    color:white;
+    font-family: 'Inconsolata', monospace;
+}
+
+#submit-button{
+    margin-left: 85%;
+    margin-top:20px;
+    margin-bottom: 100px;
+}
